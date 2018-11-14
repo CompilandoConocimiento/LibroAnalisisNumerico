@@ -525,7 +525,6 @@
         % ==============================================================
         % =================          IDEAS            ==================
         % ==============================================================
-        \clearpage
         \section{Ideas}
 
             Lo que estamos haciendo es aproximar una raíz, no encontrarla, así que habrá que decidir
@@ -548,7 +547,6 @@
         % ==============================================================
         % =================          DEFINICION       ==================
         % ==============================================================
-        \clearpage
         \section{Algoritmo}
 
             Suponte que tienes una linda función $\Fun{x} = 0$
@@ -578,7 +576,6 @@
         % ==============================================================
         % =================          IDEAS            ==================
         % ==============================================================
-        \clearpage
         \section{Ideas}
 
             Sea una función $\FunG{x}$ entonces decimos que $\Root$ es un punto fijo de $\FunG{x}$ si 
@@ -600,7 +597,6 @@
             % ==============================================================
             % =============        PROPIEDADES            ==================
             % ==============================================================
-            \vspace{1em}
             \subsection{Propiedades}
 
                 \begin{itemize}
@@ -655,14 +651,14 @@
 
             Entonces:
             \begin{MultiLineEquation*}{3}
-                \FunG{x} 
+                \Color{\ColorFunG}{g'(x)}
                     &= 1 - \dfrac{\FunDer{x}^2 - \Fun{x}\FunDerDer{x} }{\FunDer{x}^2}   \\
                     &= \dfrac{\Fun{x}\FunDerDer{x} }{\FunDer{x}^2} 
             \end{MultiLineEquation*}
 
             Entonces:
             \begin{MultiLineEquation*}{3}
-                \FunG{\Root} 
+                \Color{\ColorFunG}{g'(\Root)}
                     &= \dfrac{\Fun{\Root}\FunDerDer{\Root} }{\FunDer{\Root}^2}     \\
                     &= \dfrac{0 \FunDerDer{\Root} }{\FunDer{\Root}^2}     \\
                     &= 0   
@@ -692,8 +688,8 @@
             
             Ahora busquemos el punto en el que $y = 0$, entonces:
             \begin{MultiLineEquation*}{3}
-                \Fun{x}   &= \FunDer{x_0} (x - x_0) + \Fun{x_0}                    \\     
-                0         &= \FunDer{x_0} (x - x_0) + \Fun{x_0}                    \\     
+                \Fun{x}   &= \FunDer{x_0} (x - x_0) + \Fun{x_0}                     \\     
+                0         &= \FunDer{x_0} (x - x_0) + \Fun{x_0}                     \\     
                 - \Fun{x_0}  &= \FunDer{x_0} (x - x_0)                              \\     
                 -\dfrac{\Fun{x_0}}{\FunDer{x_0}}     &= (x - x_0)                   \\     
                 (x - x_0)  &= -\dfrac{\Fun{x_0}}{\FunDer{x_0}}                      \\     
@@ -706,11 +702,23 @@
                     x_{k+1} &= x_k - \dfrac{\Fun{x_k}}{\FunDer{x_k}}     
                 \end{MultiLineEquation*}
             \end{LargeEq}
-           
             
-            
+        % ==============================================================
+        % ======              USARLO PARA SQRT(A)               ========
+        % ==============================================================
+        \clearpage
+        \subsection{Usar Newton para calcular la $\sqrt[n]{A}$}
 
-           
+            Si quieres calcular $\sqrt[n]{A}$ entonces puedes solucionar
+            la ecuación $\Fun{x} = x^n - A = 0$.
+
+            En ese caso $\FunDer{x} = n x^{n-1}$ y nuestra iteración es:
+            \begin{LargeEq}
+                \begin{MultiLineEquation*}{3}
+                    x_{k+1} 
+                        &= x_k - \dfrac{x^n_k - A}{nx^{n-1}_k} = \dfrac{(n-1)x^n_k + A}{nx^{n-1}_k} 
+                \end{MultiLineEquation*}
+            \end{LargeEq}
 
 
 
