@@ -279,15 +279,15 @@
 
     % ====== DERIVATIVES ============
     \newcommand \MiniDerivate[1][x]   {\dfrac{d}{d #1}}             %Use: \MiniDerivate[var] for simple use [var]
-    \newcommand \Derivate[2]          {\dfrac{d \; #1}{d #2}}       %Use: \Derivate [f(x)][x]
+    \newcommand \Derivate[2]          {\dfrac{d \; #1}{d #2}}       %Use: \Derivate [\Fun{x}][x]
     \newcommand \MiniUpperDerivate[2] {\dfrac{d^{#2}}{d#1^{#2}}}    %Mini Derivate High Orden Derivate -- [x][pow]
-    \newcommand \UpperDerivate[3] {\dfrac{d^{#3} \; #1}{d#2^{#3}}}  %Complete High Orden Derivate -- [f(x)][x][pow]
+    \newcommand \UpperDerivate[3] {\dfrac{d^{#3} \; #1}{d#2^{#3}}}  %Complete High Orden Derivate -- [\Fun{x}][x][pow]
     
     \newcommand \MiniPartial[1][x] {\dfrac{\partial}{\partial #1}}  %Use: \MiniDerivate for simple use [var]
-    \newcommand \Partial[2] {\dfrac{\partial \; #1}{\partial #2}}   %Complete Partial Derivate -- [f(x)][x]
+    \newcommand \Partial[2] {\dfrac{\partial \; #1}{\partial #2}}   %Complete Partial Derivate -- [\Fun{x}][x]
     \newcommand \MiniUpperPartial[2]                                %Mini Derivate High Orden Derivate -- [x][pow] 
         {\dfrac{\partial^{#2}}{\partial #1^{#2}}}                   %Mini Derivate High Orden Derivate
-    \newcommand \UpperPartial[3]                                    %Complete High Orden Derivate -- [f(x)][x][pow]
+    \newcommand \UpperPartial[3]                                    %Complete High Orden Derivate -- [\Fun{x}][x][pow]
         {\dfrac{\partial^{#3} \; #1}{\partial#2^{#3}}}              %Use: \UpperDerivate for simple use
 
     \DeclareMathOperator \Evaluate  {\Big|}                         %Use: \Evaluate por Notation
@@ -431,12 +431,23 @@
 
     % =====  SOLVE LINEAL SYSTEM   =============
 
-    \newcommand \ColorFunction       {Teal700MD}                    %Color definition
-    \newcommand \ColorRoot           {Red700MD}                     %Color definition
+    \newcommand \ColorFun          {Teal700MD}                      %Color definition
+    \newcommand \ColorFunG         {Orange900MD}                    %Color definition
+    \newcommand \ColorFunDer       {Blue700MD}                      %Color definition
+    \newcommand \ColorFunDerDer    {Purple700MD}                    %Color definition
+    \newcommand \ColorRoot         {Green700MD}                     %Color definition
+    \newcommand \ColorVarA         {Purple700MD}                    %Color definition
+    \newcommand \ColorVarB         {BlueGrey700MD}                  %Color definition
+    \newcommand \ColorVarC         {Orange900MD}                    %Color definition
 
-    \newcommand \Function[1]     {\Color{\ColorFunction}{f\Wrap{#1}}}   %Use: f(x) = y
-    \newcommand \Root         {\Color{\ColorRoot}{\xi}}                 %Use: f(root) = 0
-
+    \newcommand \Fun[1]      {\Color{\ColorFun}{\pmb{f}\Wrap{#1}}}          %Use: \Fun{x} = y
+    \newcommand \FunG[1]     {\Color{\ColorFunG}{\pmb{g}\Wrap{#1}}}         %Use: \Fun{x} = y
+    \newcommand \FunDer[1]   {\Color{\ColorFunDer}{\pmb{f'}\Wrap{#1}}}      %Use: \Fun{x} = y
+    \newcommand \FunDerDer[1]{\Color{\ColorFunDerDer}{\pmb{f''}\Wrap{#1}}}  %Use: \Fun{x} = y
+    \newcommand \Root        {\Color{\ColorRoot}{\pmb{\xi} }}               %Use: f(root) = 0
+    \newcommand \VarA        {\Color{\ColorVarA}{\pmb{a} }}                 %Use: f(root) = 0
+    \newcommand \VarB        {\Color{\ColorVarB}{\pmb{b} }}                 %Use: f(root) = 0
+    \newcommand \VarC        {\Color{\ColorVarC}{\pmb{c} }}                 %Use: f(root) = 0
 
 
 % =====================================================
@@ -522,7 +533,7 @@
 
             Tendremos 3 opciones:
             \begin{itemize}
-                \item $\Function{\Root_k} < \epsilon$: Estamos muy cerca de que la función valga cero
+                \item $\Fun{\Root_k} < \epsilon$: Estamos muy cerca de que la función valga cero
                 \item $\dfrac{ \Abs{\Root_k} - \Abs{\Root_{k-1}} }{\Abs{\Root_k}} < \epsilon$: Las
                     estimaciones son muy parecidas y no podemos mejorar.
                 \item El número de iteraciones $k$ es mayor del que el número de iteraciones máximas.
@@ -540,23 +551,23 @@
         \clearpage
         \section{Algoritmo}
 
-            Suponte que tienes una linda función $\Function{x} = 0$
-            y tienes dos números $a, b$ tal que $\Function{a}$ sea de un signo diferente
-            al $\Function{b}$ entonces estamos seguros de que existe una raíz $\Root$
+            Suponte que tienes una linda función $\Fun{x} = 0$
+            y tienes dos números $\VarA, \VarB$ tal que $\Fun{\VarA}$ sea de un signo diferente
+            al $\Fun{\VarB}$ entonces estamos seguros de que existe una raíz $\Root$
             por ahí en medio.
 
             Entonces, puedes tomar el punto intermedio de ambos 
-            $c = a + (b - a) / 2$. Ahora pueden pasar 3 cosas:
+            $\VarC = \VarA + \dfrac{\VarB - \VarA}{2}$. Ahora pueden pasar 3 cosas:
             \begin{itemize}
-                \item Si $c$ es la raíz entonces ya estas
-                \item Si $[a, c]$ tienen signos diferentes entonces la raíz anda por ahí
-                \item Si $[c, b]$ tienen signos diferentes entonces la raíz anda por ahí
+                \item Si $\VarC$ es la raíz entonces ya estas
+                \item Si $[\VarA, \VarC]$ tienen signos diferentes entonces la raíz anda por ahí
+                \item Si $[\VarC, \VarB]$ tienen signos diferentes entonces la raíz anda por ahí
             \end{itemize}
             
-            En general, basta con suponer que el signo de $a$ es igual que el signo de $c$,
-            de ser así, entonces $c$ cumple el trabajo de $a$ entonces el intervalo es $[c, b]$.
-            De no ser así entonces tiene que hacer el trabajo de $b$ y entonces el intervalo es
-            $[a, c]$.
+            En general, basta con suponer que el signo de $\VarA$ es igual que el signo de $\VarC$,
+            de ser así, entonces $\VarC$ cumple el trabajo de $\VarA$ entonces el intervalo es $[\VarC, \VarB]$.
+            De no ser así entonces tiene que hacer el trabajo de $\VarB$ y entonces el intervalo es
+            $[\VarA, \VarC]$.
 
 
     % ===============================================================================
@@ -570,17 +581,21 @@
         \clearpage
         \section{Ideas}
 
-            Sea una función $g(x)$ entonces decimos que $\Root$ es un punto fijo si 
-            es que $\Function{\Root} = \Root$.
+            Sea una función $\FunG{x}$ entonces decimos que $\Root$ es un punto fijo de $\FunG{x}$ si 
+            es que $\FunG{\Root} = \Root$.
 
-            Suponte que podemos escribir a $\Function{x} = 0$ como 
-            $\Function{x} = g(x) - x = 0$.
+            Suponte que podemos escribir a $\Fun{x} = 0$ como 
+            $\Fun{x} = \FunG{x} - x = 0$.
 
-            Entonces cualquier punto fijo $\Root$ será una raíz de $\Function{x}$.
+            Entonces cualquier punto fijo ($\Root$) de $\FunG{x}$ será una raíz de $\Fun{x}$.
 
             La idea es entonces bastante intuitiva, toma un elemento inicial $x_n$ entonces
-            $x_{n+1} = g(x_n)$ será una mejor aproximación a la raíz.
-
+            será una mejor aproximación a la raíz esto:
+            \begin{LargeEq}
+                \begin{MultiLineEquation*}{3}
+                    x_{n+1} = \FunG{x_n}
+                \end{MultiLineEquation*}
+            \end{LargeEq}
 
             % ==============================================================
             % =============        PROPIEDADES            ==================
@@ -589,48 +604,115 @@
             \subsection{Propiedades}
 
                 \begin{itemize}
-                    \item Sea $f(x) = 0$ escrita de forma $f(x) = g(x) - x = 0$, es decir
-                        $g(x) = x$.
+                    \item Sea $\Fun{x} = 0$ escrita de forma $\Fun{x} = \FunG{x} - x = 0$, es decir
+                        $\FunG{x} = x$.
 
-                        Entonces si $\forall x \in [a, b]$ se cumple que:
+                        Entonces si $\forall x \in [\VarA, \VarB]$ se cumple que:
                         \begin{itemize}
-                            \item $g(x) \in [a, b]$
-                            \item $g(x)$ toma todos los valores entre $a$ y $b$
-                            \item $g(x)'$ existe en $(a, b)$ y existe una constante $0 < r < 1$ tal que
-                                $\Abs{g'(x)} \leq r$
+                            \item $\FunG{x} \in [\VarA, \VarB]$
+                            \item $\FunG{x}$ toma todos los valores entre $\VarA$ y $\VarB$
+                            \item $\Color{\ColorFunG}{g'(x)}$ existe en $(\VarA, \VarB)$ y existe una constante $0 < r < 1$ tal que
+                                $\Abs{\Color{\ColorFunG}{g'(x)}} \leq r$
                         \end{itemize}
 
                         Va a pasar que: 
                         \begin{itemize}
-                            \item Existe un único punto fijo $x = \Root$ de g(x) entre $[a, b]$
+                            \item Existe un único punto fijo $x = \Root$ de $\FunG{x}$ entre $[\VarA, \VarB]$
                             \item La sequencia $x_{k+1} = g(x_k)$ converge siempre a $\Root$
                         \end{itemize}
 
                 \end{itemize}
 
+
+    % ===============================================================================
+    % ===================              NEWTON                  ======================
+    % ===============================================================================
+    \chapter{Newton}
+
         % ==============================================================
-        % =================          DEFINICION       ==================
+        % =================          IDEAS            ==================
         % ==============================================================
         \clearpage
-        \section{Algoritmo}
+        \section{Definición}
 
-            Suponte que tienes una linda función $\Function{x} = 0$
-            y tienes dos números $a, b$ tal que $\Function{a}$ sea de un signo diferente
-            al $\Function{b}$ entonces estamos seguros de que existe una raíz $\Root$
-            por ahí en medio.
+            Resulta ser que el método de Newton se basa en el de punto fijo, es solo que 
+            podemos elegir una $\FunG{x}$ muy especial, $\FunG{x} = x - \dfrac{\Fun{x}}{\FunDer{x}}$.
 
-            Entonces, puedes tomar el punto intermedio de ambos 
-            $c = a + (b - a) / 2$. Ahora pueden pasar 3 cosas:
-            \begin{itemize}
-                \item Si $c$ es la raíz entonces ya estas
-                \item Si $[a, c]$ tienen signos diferentes entonces la raíz anda por ahí
-                \item Si $[c, b]$ tienen signos diferentes entonces la raíz anda por ahí
-            \end{itemize}
+            Suponte que $\FunDerDer{x}$ existe, es continua sobre $[\VarA, \VarB]$ y $\Root$ una raíz simple
+            de $\Fun{x}$ (es decir $\Fun{\Root} = 0$ y $\FunDerDer{\Root} \neq 0$).
+            Entonces usar el método de punto fijo funcionará para hallar la raíz.
+
+        % ==============================================================
+        % =============     PORQUE FUNCIONA           ==================
+        % ==============================================================
+        \vspace{1em}
+        \subsection{Porque funciona}
+
+            Elegimos a:
+            \begin{MultiLineEquation*}{3}
+                \FunG{x} = x - \dfrac{\Fun{x}}{\FunDer{x}}
+            \end{MultiLineEquation*}
+
+            Entonces:
+            \begin{MultiLineEquation*}{3}
+                \FunG{x} 
+                    &= 1 - \dfrac{\FunDer{x}^2 - \Fun{x}\FunDerDer{x} }{\FunDer{x}^2}   \\
+                    &= \dfrac{\Fun{x}\FunDerDer{x} }{\FunDer{x}^2} 
+            \end{MultiLineEquation*}
+
+            Entonces:
+            \begin{MultiLineEquation*}{3}
+                \FunG{\Root} 
+                    &= \dfrac{\Fun{\Root}\FunDerDer{\Root} }{\FunDer{\Root}^2}     \\
+                    &= \dfrac{0 \FunDerDer{\Root} }{\FunDer{\Root}^2}     \\
+                    &= 0   
+            \end{MultiLineEquation*}
+
+            Donde tenemos que $\Fun{\Root} = 0$ y $\FunDer{\Root} \neq 0$. 
+            Entonces como $\Color{\ColorFunG}{g'(x)}$ es continua, entonces eso nos
+            dice que existe una pequeña región cerca de la raíz en que 
+            $\Abs{\Color{\ColorFunG}{g'(x)}} < 1$.
+
+            Entonces si tomamos un punto inicial $x_0$ suficientemente cerca de la raíz, entonces
+            las iteraciones de punto fijo estan garantizada a converger.
             
-            En general, basta con suponer que el signo de $a$ es igual que el signo de $c$,
-            de ser así, entonces $c$ cumple el trabajo de $a$ entonces el intervalo es $[c, b]$.
-            De no ser así entonces tiene que hacer el trabajo de $b$ y entonces el intervalo es
-            $[a, c]$.
+        % ==============================================================
+        % ===== =     DE DONDE SALIO ESTA FORMULA FUNCIONA      ========
+        % ==============================================================
+        \clearpage
+        \subsection{De donde salio esta fórmula}
+
+            Busquemos un punto $x_0$ y supongamos que por ahí esta la raíz, entonces
+            podemos sacar la ecuación de la recta tangente a ese punto como:
+            \begin{MultiLineEquation*}{3}
+                y - y_0 &= \FunDer{x_0} (x - x_0)                           \\
+                \Fun{x} - \Fun{x_0} &= \FunDer{x_0} (x - x_0)             \\
+                \Fun{x}  &= \FunDer{x_0} (x - x_0) + \Fun{x_0}        
+            \end{MultiLineEquation*}
+            
+            Ahora busquemos el punto en el que $y = 0$, entonces:
+            \begin{MultiLineEquation*}{3}
+                \Fun{x}   &= \FunDer{x_0} (x - x_0) + \Fun{x_0}                    \\     
+                0         &= \FunDer{x_0} (x - x_0) + \Fun{x_0}                    \\     
+                - \Fun{x_0}  &= \FunDer{x_0} (x - x_0)                              \\     
+                -\dfrac{\Fun{x_0}}{\FunDer{x_0}}     &= (x - x_0)                   \\     
+                (x - x_0)  &= -\dfrac{\Fun{x_0}}{\FunDer{x_0}}                      \\     
+                x         &= x_0 - \dfrac{\Fun{x_0}}{\FunDer{x_0}}     
+            \end{MultiLineEquation*}
+
+            Con esto llegamos la iteración de Newton:
+            \begin{LargeEq}
+                \begin{MultiLineEquation*}{3}
+                    x_{k+1} &= x_k - \dfrac{\Fun{x_k}}{\FunDer{x_k}}     
+                \end{MultiLineEquation*}
+            \end{LargeEq}
+           
+            
+            
+
+           
+
+
 
 
 
@@ -641,7 +723,6 @@
 % //////////////////////////////////////////////////////////////////////////////////////////////////////////
 \part{Interpolantes}
 \clearpage
-
 
 
 
