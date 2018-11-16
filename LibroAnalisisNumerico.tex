@@ -8,7 +8,7 @@
 
     % *********  SPECIFIC FOR THIS BOOK  ********
     \def\ProjectAuthorLink{https://github.com/CompilandoConocimiento}
-    \def\ProjectNameLink{\ProjectAuthorLink/LibroProbabilidad}    
+    \def\ProjectNameLink{\ProjectAuthorLink/LibroAnalisisNumerico}    
     
 
     % *********   DOCUMENT ITSELF   **************
@@ -807,8 +807,15 @@
     % ==============================================================
     \section{Definición}
 
-        Resulta ser que evaluar derivadas no suele ser super fácil :v
-        Por lo tanto podemos aproximar la derivada como:
+        Aqui tenemos como dos estilos, bisección es perfecto en sentido de que una vez elegidos
+        puntos iniciales validos, la raíz ya esta \Quote{encerrada} y con cada iteración solo mejoramos.
+
+        Mientras que Newton y Secante con mucho mas rápidos pero si tomas puntos iniciales feos 
+        estos métodos divergen y nunca tendrás una respuesta, de hecho cada iteración será peor.
+        
+        Así que este método es como un DLC en Secante con el objetivo de 
+
+
         \begin{MultiLineEquation*}{3}
             \FunDer{\VarX} \approx \dfrac{\Fun{\VarX} - \Fun{\VarXmu} }{\VarX - \VarXmu}
         \end{MultiLineEquation*}
