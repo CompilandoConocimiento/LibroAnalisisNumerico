@@ -813,19 +813,54 @@
         Mientras que Newton y Secante con mucho mas rápidos pero si tomas puntos iniciales feos 
         estos métodos divergen y nunca tendrás una respuesta, de hecho cada iteración será peor.
         
-        Así que este método es como un DLC en Secante con el objetivo de 
+        Así que este método es como un DLC en Secante con el objetivo de siempre estar seguro de
+        que va a converger:
+
+        % ==============================================================
+        % =================          ITERACION            ==================
+        % ==============================================================
+        \subsection{Iteración}
+
+            \begin{enumerate}
+                \item Tienes dos puntos iniciales $(x_0, x_1)$ que encapsulen la raíz, puntos válidos para 
+                    el método de bisección. 
+                \item Ahora crea $x_2$ usando la iteración de la secante
+                \item Ahora tienes 3 puntos, para elegir con cuales dos quedarte usa la idea
+                    de bisección. Así de sencillo.
+                \item Regresa al principio
+            \end{enumerate}
 
 
-        \begin{MultiLineEquation*}{3}
-            \FunDer{\VarX} \approx \dfrac{\Fun{\VarX} - \Fun{\VarXmu} }{\VarX - \VarXmu}
-        \end{MultiLineEquation*}
-        
-        Entonces basta con esto para llegar a la iteración del método de secante:
-        \begin{LargeEq}
-            \begin{MultiLineEquation*}{3}
-                \VarXpu &= \VarX - \dfrac{\Fun{\VarX}(\VarX - \VarXmu)}{ \Fun{\VarX} - \Fun{\VarXmu} }     
-            \end{MultiLineEquation*}
-        \end{LargeEq}
+
+% //////////////////////////////////////////////////////////////////////////////////////////////////////////
+% /////////////////////                 SISTEMAS DE ECUACIONES               ///////////////////////////////
+% //////////////////////////////////////////////////////////////////////////////////////////////////////////
+\part{Aproximar Sistemas de Ecuaciones NO lineales}
+\clearpage
+
+    % ===============================================================================
+    % ===================           TOLERANCIAS                ======================
+    % ===============================================================================
+    \chapter{Ideas generales de ceros de funciones}
+
+        % ==============================================================
+        % =================          IDEAS            ==================
+        % ==============================================================
+        \section{Ideas}
+
+            Esto es sencillo, lo que tienes que hacer si es que tienes un montón de
+            ecuaciones raras a las que quieres encontrar solución basta con tomar
+            tu sistema e igualarlo a cero.
+
+            Y ahora lo que estas viendo es nada más y nada menos que una función
+            vectorial, que toma todos tus parametros y te regresa un vector columna
+            de todas tus ecuaciones evaluadas en ese punto.
+
+            Así que resolverlas es tan sencillo como encontrar una raíz dentro de 
+            una función vectorial.
+            
+
+
 
 
 
