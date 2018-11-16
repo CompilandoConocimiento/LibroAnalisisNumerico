@@ -781,7 +781,6 @@
         % ==============================================================
         % =================          IDEAS            ==================
         % ==============================================================
-        \clearpage
         \section{Definición}
 
             Resulta ser que evaluar derivadas no suele ser super fácil :v
@@ -796,6 +795,30 @@
                     \VarXpu &= \VarX - \dfrac{\Fun{\VarX}(\VarX - \VarXmu)}{ \Fun{\VarX} - \Fun{\VarXmu} }     
                 \end{MultiLineEquation*}
             \end{LargeEq}
+
+
+    % ===============================================================================
+    % ===================              REGLA FALSA             ======================
+    % ===============================================================================
+    \chapter{Regla Falsa}
+
+    % ==============================================================
+    % =================          IDEAS            ==================
+    % ==============================================================
+    \section{Definición}
+
+        Resulta ser que evaluar derivadas no suele ser super fácil :v
+        Por lo tanto podemos aproximar la derivada como:
+        \begin{MultiLineEquation*}{3}
+            \FunDer{\VarX} \approx \dfrac{\Fun{\VarX} - \Fun{\VarXmu} }{\VarX - \VarXmu}
+        \end{MultiLineEquation*}
+        
+        Entonces basta con esto para llegar a la iteración del método de secante:
+        \begin{LargeEq}
+            \begin{MultiLineEquation*}{3}
+                \VarXpu &= \VarX - \dfrac{\Fun{\VarX}(\VarX - \VarXmu)}{ \Fun{\VarX} - \Fun{\VarXmu} }     
+            \end{MultiLineEquation*}
+        \end{LargeEq}
 
 
 
