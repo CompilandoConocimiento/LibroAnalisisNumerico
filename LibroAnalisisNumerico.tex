@@ -439,6 +439,9 @@
     \newcommand \ColorVarA         {Purple700MD}                    %Color definition
     \newcommand \ColorVarB         {BlueGrey700MD}                  %Color definition
     \newcommand \ColorVarC         {Orange900MD}                    %Color definition
+    \newcommand \ColorVarX         {Purple300MD}                    %Color definition
+    \newcommand \ColorVarXpu       {Purple700MD}                    %Color definition
+    \newcommand \ColorVarXmu       {Blue300MD}                      %Color definition
 
     \newcommand \Fun[1]      {\Color{\ColorFun}{\pmb{f}\Wrap{#1}}}          %Use: \Fun{x} = y
     \newcommand \FunG[1]     {\Color{\ColorFunG}{\pmb{g}\Wrap{#1}}}         %Use: \Fun{x} = y
@@ -448,6 +451,9 @@
     \newcommand \VarA        {\Color{\ColorVarA}{\pmb{a} }}                 %Use: f(root) = 0
     \newcommand \VarB        {\Color{\ColorVarB}{\pmb{b} }}                 %Use: f(root) = 0
     \newcommand \VarC        {\Color{\ColorVarC}{\pmb{c} }}                 %Use: f(root) = 0
+    \newcommand \VarX        {\Color{\ColorVarX}{x_k }}                     %Use: f(root) = 0
+    \newcommand \VarXpu      {\Color{\ColorVarXpu}{x_{k+1}  }}              %Use: f(root) = 0
+    \newcommand \VarXmu      {\Color{\ColorVarXmu}{x_{k-1}  }}              %Use: f(root) = 0
 
 
 % =====================================================
@@ -576,6 +582,7 @@
         % ==============================================================
         % =================          IDEAS            ==================
         % ==============================================================
+        \clearpage
         \section{Ideas}
 
             Sea una función $\FunG{x}$ entonces decimos que $\Root$ es un punto fijo de $\FunG{x}$ si 
@@ -590,34 +597,59 @@
             será una mejor aproximación a la raíz esto:
             \begin{LargeEq}
                 \begin{MultiLineEquation*}{3}
-                    x_{n+1} = \FunG{x_n}
+                    \VarXpu = \FunG{\VarX}
                 \end{MultiLineEquation*}
             \end{LargeEq}
 
-            % ==============================================================
-            % =============        PROPIEDADES            ==================
-            % ==============================================================
-            \subsection{Propiedades}
+            Mira como poco a poco nos vamos acercando al punto fijo de $\FunG{x}$ que es lo
+            mismo que la raíz de $\Fun{x}$.
+            \begin{figure}[h]
+                \centering
+                \includegraphics[width=0.85\textwidth]{FixedPoint}
+                \caption{Paso de punto fijo}
+            \end{figure}
 
-                \begin{itemize}
-                    \item Sea $\Fun{x} = 0$ escrita de forma $\Fun{x} = \FunG{x} - x = 0$, es decir
-                        $\FunG{x} = x$.
 
-                        Entonces si $\forall x \in [\VarA, \VarB]$ se cumple que:
-                        \begin{itemize}
-                            \item $\FunG{x} \in [\VarA, \VarB]$
-                            \item $\FunG{x}$ toma todos los valores entre $\VarA$ y $\VarB$
-                            \item $\Color{\ColorFunG}{g'(x)}$ existe en $(\VarA, \VarB)$ y existe una constante $0 < r < 1$ tal que
-                                $\Abs{\Color{\ColorFunG}{g'(x)}} \leq r$
-                        \end{itemize}
+        % ==============================================================
+        % =================          IDEAS            ==================
+        % ==============================================================
+        \clearpage
+        \subsection{¿Cómo eligo a $g(x)$?}
 
-                        Va a pasar que: 
-                        \begin{itemize}
-                            \item Existe un único punto fijo $x = \Root$ de $\FunG{x}$ entre $[\VarA, \VarB]$
-                            \item La sequencia $x_{k+1} = g(x_k)$ converge siempre a $\Root$
-                        \end{itemize}
+            Es muy sencillo, bueno, teorícamente. Sabes que $\Fun{x} = \FunG{x} - x = 0$,
+            por lo tanto basta despejar y ver que: $\FunG{x} = x$.
+            
+            Es decir, toma a $\Fun{x} = 0$ y empieza a manipularla la expresión hasta
+            que llegues de un lado la identidad y del otro lado lo que tendrás será a $g(x)$.
 
-                \end{itemize}
+            Es decir tienes que llegar a $x = blob$ ó $x = g(x)$.
+
+            
+
+        % ==============================================================
+        % =============        PROPIEDADES            ==================
+        % ==============================================================
+        \subsection{Propiedades}
+
+            \begin{itemize}
+                \item Sea $\Fun{x} = 0$ escrita de forma $\Fun{x} = \FunG{x} - x = 0$, es decir
+                    $\FunG{x} = x$.
+
+                    Entonces si $\forall x \in [\VarA, \VarB]$ se cumple que:
+                    \begin{itemize}
+                        \item $\FunG{x} \in [\VarA, \VarB]$
+                        \item $\FunG{x}$ toma todos los valores entre $\VarA$ y $\VarB$
+                        \item $\Color{\ColorFunG}{g'(x)}$ existe en $(\VarA, \VarB)$ y existe una constante $0 < r < 1$ tal que
+                            $\Abs{\Color{\ColorFunG}{g'(x)}} \leq r$
+                    \end{itemize}
+
+                    Va a pasar que: 
+                    \begin{itemize}
+                        \item Existe un único punto fijo $x = \Root$ de $\FunG{x}$ entre $[\VarA, \VarB]$
+                        \item La sequencia $\VarXpu = g(\VarX)$ converge siempre a $\Root$
+                    \end{itemize}
+
+            \end{itemize}
 
 
     % ===============================================================================
@@ -638,10 +670,41 @@
             de $\Fun{x}$ (es decir $\Fun{\Root} = 0$ y $\FunDerDer{\Root} \neq 0$).
             Entonces usar el método de punto fijo funcionará para hallar la raíz.
 
+                        
+        % ==============================================================
+        % ===== =     DE DONDE SALIO ESTA FORMULA FUNCIONA      ========
+        % ==============================================================
+        \subsection{De donde salio esta fórmula}
+
+            Busquemos un punto $x_0$ y supongamos que por ahí esta la raíz, entonces
+            podemos sacar la ecuación de la recta tangente a ese punto como:
+            \begin{MultiLineEquation*}{3}
+                y - y_0 &= \FunDer{x_0} (x - x_0)                           \\
+                \Fun{x} - \Fun{x_0} &= \FunDer{x_0} (x - x_0)             \\
+                \Fun{x}  &= \FunDer{x_0} (x - x_0) + \Fun{x_0}        
+            \end{MultiLineEquation*}
+            
+            Ahora busquemos el punto en el que $y = 0$, entonces:
+            \begin{MultiLineEquation*}{3}
+                \Fun{x}   &= \FunDer{x_0} (x - x_0) + \Fun{x_0}                     \\     
+                0         &= \FunDer{x_0} (x - x_0) + \Fun{x_0}                     \\     
+                - \Fun{x_0}  &= \FunDer{x_0} (x - x_0)                              \\     
+                -\dfrac{\Fun{x_0}}{\FunDer{x_0}}     &= (x - x_0)                   \\     
+                (x - x_0)  &= -\dfrac{\Fun{x_0}}{\FunDer{x_0}}                      \\     
+                x         &= x_0 - \dfrac{\Fun{x_0}}{\FunDer{x_0}}     
+            \end{MultiLineEquation*}
+
+            Con esto llegamos la iteración de Newton:
+            \begin{LargeEq}
+                \begin{MultiLineEquation*}{3}
+                    \VarXpu &= \VarX - \dfrac{\Fun{\VarX}}{\FunDer{\VarX}}     
+                \end{MultiLineEquation*}
+            \end{LargeEq}
+
         % ==============================================================
         % =============     PORQUE FUNCIONA           ==================
         % ==============================================================
-        \vspace{1em}
+        \clearpage
         \subsection{Porque funciona}
 
             Elegimos a:
@@ -671,42 +734,29 @@
 
             Entonces si tomamos un punto inicial $x_0$ suficientemente cerca de la raíz, entonces
             las iteraciones de punto fijo estan garantizada a converger.
-            
+
+
         % ==============================================================
-        % ===== =     DE DONDE SALIO ESTA FORMULA FUNCIONA      ========
+        % =============           GEOMETRIA           ==================
         % ==============================================================
         \clearpage
-        \subsection{De donde salio esta fórmula}
+        \subsection{Geometría}
 
-            Busquemos un punto $x_0$ y supongamos que por ahí esta la raíz, entonces
-            podemos sacar la ecuación de la recta tangente a ese punto como:
-            \begin{MultiLineEquation*}{3}
-                y - y_0 &= \FunDer{x_0} (x - x_0)                           \\
-                \Fun{x} - \Fun{x_0} &= \FunDer{x_0} (x - x_0)             \\
-                \Fun{x}  &= \FunDer{x_0} (x - x_0) + \Fun{x_0}        
-            \end{MultiLineEquation*}
-            
-            Ahora busquemos el punto en el que $y = 0$, entonces:
-            \begin{MultiLineEquation*}{3}
-                \Fun{x}   &= \FunDer{x_0} (x - x_0) + \Fun{x_0}                     \\     
-                0         &= \FunDer{x_0} (x - x_0) + \Fun{x_0}                     \\     
-                - \Fun{x_0}  &= \FunDer{x_0} (x - x_0)                              \\     
-                -\dfrac{\Fun{x_0}}{\FunDer{x_0}}     &= (x - x_0)                   \\     
-                (x - x_0)  &= -\dfrac{\Fun{x_0}}{\FunDer{x_0}}                      \\     
-                x         &= x_0 - \dfrac{\Fun{x_0}}{\FunDer{x_0}}     
-            \end{MultiLineEquation*}
+            La interpretación de este método es tomar una estimación $\VarX$ entonces
+            lo que hacemos es tomar la recta tangente a ese punto y ver donde es que la
+            recta toca al eje $X$, ese será nuestra $\VarXpu$ y ve viendo que poco a poco lo
+            que vamos haciendo es aproximarnos a la raíz.
 
-            Con esto llegamos la iteración de Newton:
-            \begin{LargeEq}
-                \begin{MultiLineEquation*}{3}
-                    x_{k+1} &= x_k - \dfrac{\Fun{x_k}}{\FunDer{x_k}}     
-                \end{MultiLineEquation*}
-            \end{LargeEq}
+            \begin{figure}[h]
+                \centering
+                \includegraphics[width=0.65\textwidth]{Newton}
+                \caption{Paso de punto fijo}
+            \end{figure}
+
             
         % ==============================================================
         % ======              USARLO PARA SQRT(A)               ========
         % ==============================================================
-        \clearpage
         \subsection{Usar Newton para calcular la $\sqrt[n]{A}$}
 
             Si quieres calcular $\sqrt[n]{A}$ entonces puedes solucionar
@@ -715,14 +765,37 @@
             En ese caso $\FunDer{x} = n x^{n-1}$ y nuestra iteración es:
             \begin{LargeEq}
                 \begin{MultiLineEquation*}{3}
-                    x_{k+1} 
-                        &= x_k - \dfrac{x^n_k - A}{nx^{n-1}_k} = \dfrac{(n-1)x^n_k + A}{nx^{n-1}_k} 
+                    \VarXpu 
+                        &= \VarX - \dfrac{(\VarX)^n - A}{n (\VarX)^{n-1}}  
+                         = \dfrac{(n-1)(\VarX)^n + A}{n (\VarX)^{n-1}} 
                 \end{MultiLineEquation*}
             \end{LargeEq}
 
 
 
+    % ===============================================================================
+    % ===================              SECANTE                 ======================
+    % ===============================================================================
+    \chapter{Secante}
 
+        % ==============================================================
+        % =================          IDEAS            ==================
+        % ==============================================================
+        \clearpage
+        \section{Definición}
+
+            Resulta ser que evaluar derivadas no suele ser super fácil :v
+            Por lo tanto podemos aproximar la derivada como:
+            \begin{MultiLineEquation*}{3}
+                \FunDer{\VarX} \approx \dfrac{\Fun{\VarX} - \Fun{\VarXmu} }{\VarX - \VarXmu}
+            \end{MultiLineEquation*}
+            
+            Entonces basta con esto para llegar a la iteración del método de secante:
+            \begin{LargeEq}
+                \begin{MultiLineEquation*}{3}
+                    \VarXpu &= \VarX - \dfrac{\Fun{\VarX}(\VarX - \VarXmu)}{ \Fun{\VarX} - \Fun{\VarXmu} }     
+                \end{MultiLineEquation*}
+            \end{LargeEq}
 
 
 
