@@ -432,8 +432,10 @@
     % =====  SOLVE LINEAL SYSTEM   =============
 
     \newcommand \ColorFun          {Teal700MD}                      %Color definition
+    \newcommand \ColorBigFun       {Teal700MD}                      %Color definition
     \newcommand \ColorFunG         {Orange900MD}                    %Color definition
     \newcommand \ColorFunDer       {Blue700MD}                      %Color definition
+    \newcommand \ColorBigFunDer    {Blue700MD}                      %Color definition
     \newcommand \ColorFunDerDer    {Purple700MD}                    %Color definition
     \newcommand \ColorRoot         {Green700MD}                     %Color definition
     \newcommand \ColorVarA         {Purple700MD}                    %Color definition
@@ -444,8 +446,10 @@
     \newcommand \ColorVarXmu       {Blue300MD}                      %Color definition
 
     \newcommand \Fun[1]      {\Color{\ColorFun}{\pmb{f}\Wrap{#1}}}          %Use: \Fun{x} = y
+    \newcommand \BigFun[1]   {\Color{\ColorBigFun}{\pmb{F}\Wrap{#1}}}       %Use: \Fun{x} = y
     \newcommand \FunG[1]     {\Color{\ColorFunG}{\pmb{g}\Wrap{#1}}}         %Use: \Fun{x} = y
     \newcommand \FunDer[1]   {\Color{\ColorFunDer}{\pmb{f'}\Wrap{#1}}}      %Use: \Fun{x} = y
+    \newcommand \BigFunDer[1]{\Color{\ColorFunDer}{\pmb{F'}\Wrap{#1}}}      %Use: \Fun{x} = y
     \newcommand \FunDerDer[1]{\Color{\ColorFunDerDer}{\pmb{f''}\Wrap{#1}}}  %Use: \Fun{x} = y
     \newcommand \Root        {\Color{\ColorRoot}{\pmb{\xi} }}               %Use: f(root) = 0
     \newcommand \VarA        {\Color{\ColorVarA}{\pmb{a} }}                 %Use: f(root) = 0
@@ -860,6 +864,57 @@
             una función vectorial.
             
 
+    % ===============================================================================
+    % ===================           NEWTON                     ======================
+    % ===============================================================================
+    \chapter{Newton Generalizado}
+
+        % ==============================================================
+        % =================          IDEAS            ==================
+        % ==============================================================
+        \clearpage
+        \section{Ideas}
+
+            Recuerda que la iteración de Newton es:
+            \begin{LargeEq}
+                \begin{MultiLineEquation*}{3}
+                    \VarXpu 
+                        &= \VarX - \dfrac{\Fun{\VarX}}{\FunDer{\VarX}}     
+                        &= \VarX - \FunDer{\VarX}^{-1} \Fun{\VarX}      
+                \end{MultiLineEquation*}
+            \end{LargeEq}
+
+            Por lo tanto la idea de Newtons generalizado es
+            que si $\BigFun{x}: \Reals^n \to \Reals^n$:
+            \begin{LargeEq}
+                \begin{MultiLineEquation*}{3}
+                    \Over \VarXpu  
+                        &= \Over \VarX - J_F\Wrap{\Over \VarX}^{-1} \BigFun{\Over \VarX}      
+                \end{MultiLineEquation*}
+            \end{LargeEq}
+
+            Espera, espera, que demonios es $J_F$ te preguntaras, pues, es el Jacobiano,
+            es una matriz que representa \Quote{la derivada de la función $\BigFun{x}$}.
+
+            Pero, como te darás cuenta no solo hay que calcular el Jacobiano, sino que
+            hay que evaluarlo y después invertir la matriz que nos da, y eso, pequeño ser
+            humano no es fácil, así que podemos expresar la iteración de otra manera:
+            \begin{LargeEq}
+                \begin{MultiLineEquation*}{3}
+                    \Over \VarXpu  
+                        &= \Over \VarX + \Over S_k    
+                \end{MultiLineEquation*}
+            \end{LargeEq}
+
+            Donde $\Over S_k$ como la solución al sistema:
+            \begin{LargeEq}
+                \begin{MultiLineEquation*}{3}
+                    J_F(\Over \VarX) \Over S_k = - \BigFun{\Over \VarX} 
+                \end{MultiLineEquation*}
+            \end{LargeEq}
+
+            
+
 
 
 
@@ -882,6 +937,7 @@
         % ==============================================================
         \clearpage
         \section{Definición}
+
 
 
 
