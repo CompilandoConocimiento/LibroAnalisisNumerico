@@ -431,7 +431,7 @@
 
     % =====  SOLVE LINEAL SYSTEM   =============
 
-    \newcommand \ColorFun          {Teal700MD}                      %Color definition
+    \newcommand \ColorFun          {Red700MD}                       %Color definition
     \newcommand \ColorBigFun       {Teal700MD}                      %Color definition
     \newcommand \ColorFunG         {Orange900MD}                    %Color definition
     \newcommand \ColorFunDer       {Blue700MD}                      %Color definition
@@ -444,6 +444,8 @@
     \newcommand \ColorVarX         {Purple300MD}                    %Color definition
     \newcommand \ColorVarXpu       {Purple700MD}                    %Color definition
     \newcommand \ColorVarXmu       {Blue300MD}                      %Color definition
+    \newcommand \ColorVarXOne      {Purple700MD}                    %Color definition
+    \newcommand \ColorVarXTwo      {Blue700MD}                      %Color definition
 
     \newcommand \Fun[1]      {\Color{\ColorFun}{\pmb{f}\Wrap{#1}}}          %Use: \Fun{x} = y
     \newcommand \BigFun[1]   {\Color{\ColorBigFun}{\pmb{F}\Wrap{#1}}}       %Use: \Fun{x} = y
@@ -458,6 +460,8 @@
     \newcommand \VarX        {\Color{\ColorVarX}{x_k }}                     %Use: f(root) = 0
     \newcommand \VarXpu      {\Color{\ColorVarXpu}{x_{k+1}  }}              %Use: f(root) = 0
     \newcommand \VarXmu      {\Color{\ColorVarXmu}{x_{k-1}  }}              %Use: f(root) = 0
+    \newcommand \VarXOne     {\Color{\ColorVarXOne}{x_{1}  }}               %Use: x_1
+    \newcommand \VarXTwo     {\Color{\ColorVarXTwo}{x_{2}  }}               %Use: x_2
 
 
 % =====================================================
@@ -926,7 +930,6 @@
 \clearpage
 
 
-
     % ===============================================================================
     % ===================    INTERPOLANTE DE LAGRANGE          ======================
     % ===============================================================================
@@ -937,6 +940,92 @@
         % ==============================================================
         \clearpage
         \section{Definición}
+
+
+% //////////////////////////////////////////////////////////////////////////////////////////////////////////
+% /////////////////////                  OPTIMIZACION                        ///////////////////////////////
+% //////////////////////////////////////////////////////////////////////////////////////////////////////////
+\part{Optimización}
+\clearpage
+
+    % ===============================================================================
+    % ===================             SECCION AUREA            ======================
+    % ===============================================================================
+    \chapter{Sección Áurea}
+
+        % ==============================================================
+        % =================          DEFINICION       ==================
+        % ==============================================================
+        \clearpage
+        \section{Unimodal}
+
+            Tomemos una función unimodal $\Fun{x} : \Reals \to \Reals$ dentro de un rango
+            $[\VarA, \VarB]$.
+
+            Decir que es unimodal es decir que la función antes del mínimo siempre 
+            decrece y después del mínimo siempre crece.
+
+            O más formalmente tenemos que:
+            \begin{itemize}
+                \item $\forall \VarXOne, \VarXTwo$ tal que 
+                    $\VarXOne < \VarXTwo < minimo$ entonces $\Fun{\VarXOne} > \Fun{\VarXTwo}$ 
+                \item $\forall \VarXOne, \VarXTwo$ tal que 
+                    $minimo < \VarXOne < \VarXTwo$ entonces $\Fun{\VarXOne} < \Fun{\VarXTwo}$ 
+            \end{itemize}
+
+            
+        % ==============================================================
+        % =================          ALGORITMO        ==================
+        % ==============================================================
+        \section{Algoritmo}
+
+            Toma un segmento en el que nuestra función $\Fun{x}$ es unimodal. Llamemoslo $[\VarA, \VarB]$.
+
+            Entonces definimos:
+            \begin{itemize}
+                \item $\tau = \dfrac{\sqrt{5}-1}{2} = 0.618$
+                \item $1 - \tau = 0.382$
+                \item $\VarXOne = \VarA + (1-\tau)(\VarB - \VarA)$
+                \item $\VarXTwo = \VarA + (\tau)  (\VarB - \VarA)$
+            \end{itemize}
+
+            Con esta definición creo que es fácil probar que $\VarA < \VarB$
+
+            Ahora, pueden pasar dos cosas:
+
+            \begin{multicols*}{2}
+                \begin{itemize}
+                    \item $\Fun{\VarXOne} < \Fun{\VarXTwo}$:
+
+                        Entonces estamos seguros de que el mínimo no puede estar en el segmento 
+                        $[\VarXTwo, \VarB]$ porque como vimos es una función unimodal.
+
+                        Por esto mismo tomamos que:
+                        \begin{itemize}
+                            \item $\VarB = \VarXTwo$
+                            \item $\VarXTwo = \VarXOne$
+                            \item $\VarXOne = \VarA + (1-\tau)(\VarB - \VarA)$
+                        \end{itemize}
+
+                    \ForceColumnBreak
+
+                    \item $\Fun{\VarXOne} > \Fun{\VarXTwo}$:
+
+                    Entonces estamos seguros de que el mínimo no puede estar en el segmento 
+                    $[\VarA, \VarXOne]$ porque como vimos es una función unimodal.
+
+                    Por esto mismo tomamos que:
+                        \begin{itemize}
+                            \item $\VarA = \VarXOne$
+                            \item $\VarXOne = \VarXTwo$
+                            \item $\VarXTwo = \VarA + (\tau)(\VarB - \VarA)$
+                        \end{itemize}
+
+                \end{itemize}
+            \end{multicols*}
+            
+
+
 
 
 
