@@ -1,5 +1,5 @@
 % *****************************************************************************************************
-% ****************************              SIMPLE EXAMPLE             ********************************
+% ****************************             NUMERICAL ANALYSIS          ********************************
 % *****************************************************************************************************
 
 % =======================================================
@@ -458,6 +458,7 @@
     \newcommand \VarB        {\Color{\ColorVarB}{\pmb{b} }}                 %Use: f(root) = 0
     \newcommand \VarC        {\Color{\ColorVarC}{\pmb{c} }}                 %Use: f(root) = 0
     \newcommand \VarX        {\Color{\ColorVarX}{x_k }}                     %Use: f(root) = 0
+    \newcommand \VarXi       {\Color{\ColorVarX}{x_i }}                     %Use: f(root) = 0
     \newcommand \VarXpu      {\Color{\ColorVarXpu}{x_{k+1}  }}              %Use: f(root) = 0
     \newcommand \VarXmu      {\Color{\ColorVarXmu}{x_{k-1}  }}              %Use: f(root) = 0
     \newcommand \VarXOne     {\Color{\ColorVarXOne}{x_{1}  }}               %Use: x_1
@@ -931,6 +932,64 @@
 
 
     % ===============================================================================
+    % ===================           IDEAS GENERALES            ======================
+    % ===============================================================================
+    \chapter{Ideas Generales}
+
+        % ==============================================================
+        % =================          DEFINICION       ==================
+        % ==============================================================
+        \clearpage
+        \section{Definición}
+
+            Suponte que existe una función ($\Fun{x}$) que queremos conocer, pero que no conocemos :(
+            Lo único que tienes es un montón de puntos ($x_i$) y  el valor de la función en ese punto ($y_i$).
+
+            Lo que haremos en este cápitulo será aproximar a esa función en un intervalo.
+
+
+    % ===============================================================================
+    % ===================    INTERPOLANTE LINEAL               ======================
+    % ===============================================================================
+    \chapter{Interpolante Lineal}
+
+        % ==============================================================
+        % =================          DEFINICION       ==================
+        % ==============================================================
+        \section{Definición}
+
+            Lo único que hacemos es aproximar la función como un montón de lineas, y bueno, no hay mucho
+            más que decir.
+
+            El interpolante esta dado por:
+            \begin{MultiLineEquation*}{3}
+                I(x) := I(x_i) = y_i + \dfrac{x_{i+1} - x_i}{y_{i+1} - y_i}(x - x_i)
+            \end{MultiLineEquation*}
+
+            \begin{figure}[h]
+                \centering
+                \includegraphics[width=0.45\textwidth]{LinealInterpolation}
+                \caption{Ejemplo de como se ve}
+            \end{figure}
+
+    
+    % ===============================================================================
+    % ===================    INTERPOLANTE GRADO N              ======================
+    % ===============================================================================
+    \chapter{Interpolante Grado N}
+
+        % ==============================================================
+        % =================          DEFINICION       ==================
+        % ==============================================================
+        \section{Definición}
+
+            Es la idea clásica, es suponer que la función que estamos buscando es un polinomio de grado $n$,
+            en cuyo caso basta con hacer la clásica matriz de Vandermonde y resolver por mínimo cuadrados y
+            obtendremos los coeficientes que estamos buscando.
+
+
+
+    % ===============================================================================
     % ===================    INTERPOLANTE DE LAGRANGE          ======================
     % ===============================================================================
     \chapter{Interpolante de Lagrange}
@@ -941,6 +1000,116 @@
         \clearpage
         \section{Definición}
 
+            La idea es basicamente la misma, si tenemos $n$ puntos y sus valuaciones entonces
+            podemos facilmente ver que existe un solo polinomio de grado $n$ que pasa por esos
+            puntos. Justo como en el interpolante pasado, pero la diferencia en como obtenemos dicho
+            polinomio.
+
+        % ==============================================================
+        % =================          POLINOMIO        ==================
+        % ==============================================================
+        \section{Polinomio de Langrange}
+
+            El polinomio de Langrange esta asociado a un punto en especial de nuestro conjunto
+            de puntos. Tiene que cumplir que:
+            \begin{itemize}
+                \item Para un $x_i$ tenemos que $L_i(x_i) = 1$
+                \item Para un $x_j$ tal que $i \neq j$, entonces $L_j(x_i) = 0$
+            \end{itemize}
+
+            Veamos como sería para el caso de los puntos:
+
+            % ======== EJEMPLO ========
+            \begin{SmallIndentation}[1em]
+                \textbf{Ejemplo}:
+            
+                Suponte que tenemos dos puntos ($x_0, y_0$) y ($x_1, y_1$).
+                Entonces lo que queremos es un polinomio que evaluado en esos puntos de
+                lo que tiene que dar y de grado 2. Es sencillo:
+                \begin{MultiLineEquation*}{3}
+                    L_0(x) = \dfrac{x - x_1}{x_0 - x_1}
+                    \MegaSpace
+                    L_1(x) = \dfrac{x - x_0}{x_1 - x_0}
+                \end{MultiLineEquation*}
+
+                Entonces el interpolante es tan sencillo como:
+                \begin{MultiLineEquation*}{3}
+                    I(x) := f(x_0) \; L_0(x) + f(x_1) \; L_1(x)
+                \end{MultiLineEquation*}
+
+            \end{SmallIndentation}
+
+            Siendo generales tenemos que:
+            \begin{itemize}
+                    \item 
+                        Un polinomio de Lagrange:
+                        \begin{MultiLineEquation*}{3}
+                            L_k(x) := \prod_{i = 0, i \neq k} \dfrac{x - x_i}{x_k - x_i}
+                        \end{MultiLineEquation*}
+                        
+                    \item 
+                        Nuestro interpolante:
+                            \begin{MultiLineEquation*}{3}
+                                I(x) := f(x_0) \; L_0(x) + f(x_1) \; L_1(x) + \dots + f(x_n) \; L_n(x)
+                            \end{MultiLineEquation*}
+            \end{itemize}
+                
+    % ===============================================================================
+    % ===================    INTERPOLANTE DE NEWTON            ======================
+    % ===============================================================================
+    \chapter{Interpolante de Newton}
+
+        % ==============================================================
+        % =================          DEFINICION       ==================
+        % ==============================================================
+        \clearpage
+        \section{Definición}
+
+            La idea es basicamente la misma, si tenemos $n$ puntos y sus valuaciones entonces
+            podemos facilmente ver que existe un solo polinomio de grado $n$ que pasa por esos
+            puntos. Justo como en el interpolante pasado, pero la diferencia en se vera dicho interpolante.
+
+            Queremos que se vea como:
+            \begin{MultiLineEquation*}{3}
+                I(x) := a_0
+                        + a_1 (x-x_0)
+                        + a_2 (x-x_0)(x-x_1)
+                        + \dots
+                        + a_n (x-x_0)(x-x_1)\dots(x-x_{n-1})
+            \end{MultiLineEquation*}
+
+            Ahora todo lo que necesitamos saber es como sacar esos coeficientes.
+
+        % ==============================================================
+        % ===========         DIFERENCIAS DIVIDIDAS    =================
+        % ==============================================================
+        \clearpage
+        \section{Diferencias Divididas}
+
+            Decimos que la i-ésima diferencia dividida de orden cero es:
+            \begin{MultiLineEquation*}{3}
+                f[x_i] = f(x_i)
+            \end{MultiLineEquation*}
+            
+            Denotamos la i-ésima diferencia dividida de primer orden como:
+            \begin{MultiLineEquation*}{3}
+                f[x_i, x_{i+1}] = \dfrac{f[x_{i+1}] - f[x_i]}{x_{i+1} - x_i}
+            \end{MultiLineEquation*}
+
+            Por lo tanto podemos generalizar y decir que:
+            \begin{MultiLineEquation*}{3}
+                f[x_i \dots, x_j]
+                    := \dfrac{ f[x_{i+1}, \dots, x_j] - f[x_i, \dots, x_{j-1}] }{ f(x_j) - f(x_i) }
+            \end{MultiLineEquation*}
+            
+            Y lo mas genial ahora es que podemos mostrar el interpolante es:
+            \begin{MultiLineEquation*}{3}
+                I(x) := f[x_0] + \sum_{k = i}^n f[x_0, x_1, \dots, x_k](x-x_0)(x-x_1)\dots(x-x_{k-1})
+            \end{MultiLineEquation*}
+            
+
+
+            
 
 % //////////////////////////////////////////////////////////////////////////////////////////////////////////
 % /////////////////////                  OPTIMIZACION                        ///////////////////////////////
