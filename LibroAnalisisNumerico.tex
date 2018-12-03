@@ -1084,7 +1084,7 @@
         % ===========         DIFERENCIAS DIVIDIDAS    =================
         % ==============================================================
         \clearpage
-        \section{Diferencias Divididas}
+        \section{Coeficinetes: Diferencias Divididas}
 
             Decimos que la i-ésima diferencia dividida de orden cero es:
             \begin{MultiLineEquation*}{3}
@@ -1106,10 +1106,108 @@
             \begin{MultiLineEquation*}{3}
                 I(x) := f[x_0] + \sum_{k = i}^n f[x_0, x_1, \dots, x_k](x-x_0)(x-x_1)\dots(x-x_{k-1})
             \end{MultiLineEquation*}
-            
+
+         % ==============================================================
+        % ===========         DIFERENCIAS DIVIDIDAS    =================
+        % ==============================================================
+        \clearpage
+        \section{División Homogenea}
+
+            Si es que podemos asegurar de que nuestros puntos estan tomados de una partición
+            homogenea (de distance $h$) entonces se pueden simplificar muchas cosas.
+
+            Pues se puede hacer el cambio de variable tal que:
+            $x_s = x_0 + sh$ para tantas $s$ como elementos en una partición.
+            Ahora, siendo incluso mas general podemos decir que  $x = x_0 + sh$ $\forall s \in \Reals$
+
+            Nota que con esto ahora:
+            $x - x_i = (s - i)h$
+
+            Y con esto la podemos expresar el interpolante como:
+            \begin{MultiLineEquation*}{3}
+                I(x) := I(x_0 + sh)  
+                    &= \sum_{k = 0}^n s(s-1)\dots(s-k+1)h^k f[x_0, \dots, x_k]  \\
+                    &= f[x_0] + \sum_{k = 1}^n { s \choose k } k! h^k f[x_0, \dots, x_k]  \\
+            \end{MultiLineEquation*}
 
 
             
+
+
+    % ===============================================================================
+    % ===================    INTERPOLANTE DE HERMITE            ======================
+    % ===============================================================================
+    \chapter{Interpolante de Hermite}
+
+        % ==============================================================
+        % =================          DEFINICION       ==================
+        % ==============================================================
+        \clearpage
+        \section{Definición}
+
+            La idea es generar a partir de un grupo de $n$ puntos, un interpolantes, 
+            pero el truco es que dicho interpolante también concuerde en sus devivadas,
+            es decir, asegurarme que el interpolante y la función original tengan la misma
+            pendiente.
+
+            Por eso no solo necesitamos un grupo de puntos, sino también del valor númerico
+            de las derivadas en esos puntos.
+
+            Por eso también será un polinomio de grado $2n+1$.
+
+        % ==============================================================
+        % =================        INTERPOLANTE       ==================
+        % ==============================================================
+        \section{Interpolante}
+            
+            Este esta dado por:
+            \begin{largeEq}
+                \begin{MultiLineEquation*}{3}
+                    H_{2n+1}(x)
+                        &= \sum_{j=0}^n f(x_j) H_j(x) + \sum_{j=0}^n f'(x_j) \hat{H_j}(x) 
+                \end{MultiLineEquation*}
+            \end{largeEq}
+
+            Donde:
+            \begin{itemize}
+                \item $H_j(x) 
+                            = (1 - 2(x - x_j)L_j'(x_j))
+                            L_j^2(x)
+                        $
+                \item $\hat{H_j}(x) 
+                        = (x - x_j)L_j^2(x)
+                    $
+            \end{itemize}
+
+            
+        % ==============================================================
+        % =================        PROPIEDADES        ==================
+        % ==============================================================
+        \clearpage
+        \section{Propiedades}
+            
+            El polinomio de Langrange cumple que:
+            \begin{MultiLineEquation*}{3}
+            L_{n, j}(x_i) = 
+                \begin{cases}
+                    0 & \text{ si } j \neq i    \\
+                    1 & \text{ si } j   =  i    \\
+                \end{cases}
+            \end{MultiLineEquation*}
+
+            Pues mira que:
+            \begin{MultiLineEquation*}{3}
+                H_{n, j}(x_i) = 
+                    \begin{cases}
+                        0 & \text{ si } j \neq i    \\
+                        1 & \text{ si } j   =  i    \\
+                    \end{cases}
+                \end{MultiLineEquation*}
+    
+
+            
+
+
 
 % //////////////////////////////////////////////////////////////////////////////////////////////////////////
 % /////////////////////                  OPTIMIZACION                        ///////////////////////////////
